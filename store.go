@@ -28,7 +28,7 @@ func Upload(filename string) {
   println("store -- Upload called with filename " + filename)
   bucket := CreateBucket()
 
-  tempDir := "temp/"
+  tempDir := "/tmp/store-uploads/"
   data, err := ioutil.ReadFile(tempDir + filename)
   if err != nil {
     println("store -- error reading file" + tempDir + filename)
