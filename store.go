@@ -28,10 +28,10 @@ func Upload(filename string) {
   println("store -- Upload called with filename " + filename)
   bucket := CreateBucket()
 
-  tempDir := "/tmp/store-uploads/"
+  tempDir := "temp/"
   data, err := ioutil.ReadFile(tempDir + filename)
   if err != nil {
-    println("store -- error reading file" + tempDir + filename)
+    println("store -- error reading file '" + tempDir + filename + "'")
   }
 
   extension := filename[(len(filename)-4):]
