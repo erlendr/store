@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/mitchellh/goamz/aws"
 	"github.com/mitchellh/goamz/s3"
+	"io"
 	"io/ioutil"
 	"mime"
 )
@@ -43,16 +44,16 @@ func Upload(filename string) {
 	}
 }
 
-func Download(filename string) *ReadCloser {
+func Download(filename string) io.ReadCloser {
 	println("store -- Download called with filename " + filename)
 	bucket := CreateBucket()
 
-	readCloser, err = bucket.GetReader(filename)
+	rc, err := bucket.GetReader(filename)
 
 	if err != nil {
 		println("store -- error during bucket GET")
 		panic(err)
 	}
 
-	return *readCloser
+	return rc
 }
