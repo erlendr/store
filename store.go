@@ -43,17 +43,16 @@ func Upload(filename string) {
 	}
 }
 
-func Download (filename string) *ReadCloser {
+func Download(filename string) *ReadCloser {
 	println("store -- Download called with filename " + filename)
 	bucket := CreateBucket()
 
-	tempDir := "temp/"
-
 	readCloser, err = bucket.GetReader(filename)
-  if err := nil {
-    println("store -- error during bucket GET")
-    panic(err)
-  }
 
-  return *readCloser
+	if err != nil {
+		println("store -- error during bucket GET")
+		panic(err)
+	}
+
+	return *readCloser
 }
