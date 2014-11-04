@@ -44,6 +44,19 @@ func Upload(filename string) {
 	}
 }
 
+func UploadReader(filename string, data io.Reader, dataLength int64) {
+	println("store -- UploadReader called with filename " + filename)
+
+	bucket := CreateBucket()
+
+	extension := filename[(len(filename) - 4):]
+	err := bucket.PutReader(filename, data, dataLength, mime.TypeByExtension(extension), s3.PublicRead)
+	if err != nil {
+		println("store -- error during bucket PUT using PutReader")
+		panic(err)
+	}
+}
+
 func Download(filename string) io.ReadCloser {
 	println("store -- Download called with filename " + filename)
 	bucket := CreateBucket()
