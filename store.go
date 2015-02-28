@@ -44,14 +44,13 @@ func CreateBucket() *s3.Bucket {
   return bucket
 }
 
-func Upload(filename string) {
+func Upload(directory string, filename string) {
   println("store -- Upload called with filename " + filename)
   bucket := CreateBucket()
 
-  tempDir := "temp/"
-  data, err := ioutil.ReadFile(tempDir + filename)
+  data, err := ioutil.ReadFile(directory + filename)
   if err != nil {
-    println("store -- error reading file '" + tempDir + filename + "'")
+    println("store -- error reading file '" + directory + filename + "'")
     panic(err)
   }
 
